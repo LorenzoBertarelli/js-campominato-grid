@@ -1,18 +1,40 @@
-// CREARE UNA GRGLIA 10X10 CON NUMERI CASUALI DA 1 A 100
+document.getElementById("play-button").addEventListener("click", startGame);
 
-const numberOfSqaure = 100;
-const numbers = generateRandomNumbersArray(numberOfSqaure);
-console.log(numbers);
+function startGame() {
+    const level = parseInt(document.querySelector("select").value);
+    let cellsnumbers;
+    switch(level) {
+        case 1:
+            cellsnumbers = 100;
+            break;
+        case 2:
+            cellsnumbers = 81;
+            break;
+        case 3:
+            cellsnumbers = 49;
+            break;
+        default:
+            cellsnumbers = 100;
+    }
 
-// Per ogni numero generato genero le caselle della griglia 
-const grid =document.querySelector(".grid");
-for (let i = 0; i < numbers.length; i++) {
-    const currentNumber = numbers[i];
-    const newItem = generateGridItem(currentNumber);
-    newItem.addEventListener("click", handleItemClick);
-    grid.append(newItem);
+
+
+    // CREARE UNA GRGLIA 10X10 CON NUMERI CASUALI DA 1 A 100
+
+    const numberOfSqaure = cellsnumbers;
+    const numbers = generateRandomNumbersArray(numberOfSqaure);
+    console.log(numbers);
+
+    // Per ogni numero generato genero le caselle della griglia 
+    const grid =document.querySelector(".grid");
+        grid.innerHTML = "";
+    for (let i = 0; i < numbers.length; i++) {
+        const currentNumber = numbers[i];
+        const newItem = generateGridItem(currentNumber);
+        newItem.addEventListener("click", handleItemClick);
+        grid.append(newItem);
+    }
 }
-
 // Funzione
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
